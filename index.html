@@ -1204,7 +1204,7 @@
                 <h3>Contact form</h3>
                 <p>Use this form to tell us about your business, your current workflow, and where you think time and money are being lost. Once the backend is connected, submissions can be delivered directly to your inbox.</p>
 
-                <form action="thank-you.html" method="GET" class="form-grid">
+                <form action="https://formspree.io/f/mdapklgk" method="POST" class="form-grid">
                     <div class="form-row">
                         <div class="form-group">
                             <input type="text" name="firstName" placeholder="First name" required aria-label="First name">
@@ -1230,6 +1230,9 @@
                     <div class="form-group">
                         <textarea name="message" placeholder="Tell us about your business, your current workflow, and what you want to improve." required aria-label="Message"></textarea>
                     </div>
+
+                    <input type="hidden" name="_redirect" value="https://suburbahnsolutions.com/thank-you.html" />
+                    <input type="hidden" name="_subject" value="New Suburbahn Solutions Lead" />
 
                     <button type="submit" class="form-submit">Send inquiry →</button>
                 </form>
