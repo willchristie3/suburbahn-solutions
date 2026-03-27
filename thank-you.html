@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Suburbahn Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 28%),
+                        radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 22%),
+                        #07111f;
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(7, 17, 31, 0.85);
+            backdrop-filter: blur(20px);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+        }
+
+        .logo {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.11em;
+            color: #07c8f9;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            font-size: 0.875rem;
+            color: #cbd5e1;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        main {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem;
+            min-height: calc(100vh - 81px);
+            display: flex;
+            align-items: center;
+        }
+
+        .thank-you-card {
+            width: 100%;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(30, 41, 59, 0.2);
+            backdrop-filter: blur(20px);
+        }
+
+        @media (max-width: 640px) {
+            .thank-you-card {
+                padding: 1.5rem;
+            }
+        }
+
+        .icon-circle {
+            width: 4rem;
+            height: 4rem;
+            margin: 0 auto;
+            border-radius: 50%;
+            background-color: rgba(16, 185, 129, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #10c981;
+            font-size: 2rem;
+        }
+
+        .label {
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #07c8f9;
+        }
+
+        .thank-you-card h1 {
+            margin-top: 0.75rem;
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+        }
+
+        @media (max-width: 640px) {
+            .thank-you-card h1 {
+                font-size: 1.875rem;
+            }
+        }
+
+        .thank-you-card > p {
+            max-width: 42rem;
+            margin: 0 auto;
+            font-size: 1.125rem;
+            line-height: 1.75;
+            color: #cbd5e1;
+        }
+
+        .button-group {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(2, 1fr);
+            margin-top: 2.5rem;
+            max-width: 28rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 640px) {
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border-radius: 9999px;
+            padding: 0.875rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #ffffff;
+            color: #0b0f1a;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-0.125rem);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .additional-info {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 42rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .additional-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-methods {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(3, 1fr);
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-method {
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .contact-method h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #f1f5f9;
+        }
+
+        .contact-method p {
+            font-size: 0.875rem;
+            color: #cbd5e1;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-method a {
+            color: #07c8f9;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        .contact-method a:hover {
+            text-decoration: underline;
+        }
+
+        .next-steps {
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(7, 200, 249, 0.05);
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .next-steps h3 {
+            margin-bottom: 1rem;
+            color: #07c8f9;
+        }
+
+        .next-steps ol {
+            list-style-position: inside;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .next-steps li {
+            font-size: 0.875rem;
+            color: #cbd5e1;
+        }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            padding: 2rem 1.5rem;
+            color: #64748b;
+            background-color: rgba(7, 17, 31, 0.5);
+        }
+
+        .footer-content {
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-content span {
+            font-weight: 400;
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">
+                <div class="logo-title">Suburbahn Solutions</div>
+                <div class="logo-subtitle">AI Consulting & Automation</div>
+            </a>
+            <nav>
+                <a href="/#services">Services</a>
+                <a href="/#demo">Demo</a>
+                <a href="/#process">Process</a>
+                <a href="/#about">About</a>
+                <a href="/#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="thank-you-card">
+            <div class="icon-circle">✓</div>
+            <p class="label">Inquiry received</p>
+            <h1>Thank you for reaching out.</h1>
+            <p>We received your message and will follow up shortly. We appreciate your interest in Suburbahn Solutions and look forward to learning more about your business.</p>
+
+            <div class="button-group">
+                <a href="/" class="btn btn-primary">Return to homepage →</a>
+                <a href="mailto:ColeSuburbahnSolutions@Outlook.com" class="btn btn-secondary">Email us directly ✉</a>
+            </div>
+
+            <div class="additional-info">
+                <h2>What happens next</h2>
+                
+                <div class="next-steps">
+                    <h3>Our process</h3>
+                    <ol>
+                        <li><strong>Review:</strong> We'll review your submission and understand your business goals.</li>
+                        <li><strong>Connect:</strong> One of our partners will reach out within 1-2 business days to schedule a call.</li>
+                        <li><strong>Discovery Call:</strong> We'll discuss your current workflow and where AI automation can create the most value.</li>
+                        <li><strong>Custom Demo:</strong> You'll see a live demonstration tailored to your specific business.</li>
+                        <li><strong>Plan Forward:</strong> If there's a fit, we'll outline next steps and pricing.</li>
+                    </ol>
+                </div>
+
+                <h2 style="margin-top: 2rem;">Reach out directly</h2>
+                <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 1rem;">If you'd prefer to connect right away, here are your best contact options:</p>
+
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <h3>Cole Heilig</h3>
+                        <p>Managing Partner</p>
+                        <a href="mailto:ColeSuburbahnSolutions@Outlook.com">ColeSuburbahnSolutions@Outlook.com</a>
+                    </div>
+                    <div class="contact-method">
+                        <h3>Will Christie</h3>
+                        <p>Managing Partner</p>
+                        <a href="mailto:WillSuburbahnSolutions@Outlook.com">WillSuburbahnSolutions@Outlook.com</a>
+                    </div>
+                    <div class="contact-method">
+                        <h3>Landon Lawson</h3>
+                        <p>Partner</p>
+                        <a href="mailto:LandonSuburbahnSolutions@Outlook.com">LandonSuburbahnSolutions@Outlook.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            Suburbahn Solutions <span>— AI Consulting & Automation</span>
+        </div>
+        <div>© 2026 Suburbahn Solutions. All rights reserved.</div>
+    </footer>
+</body>
+</html>

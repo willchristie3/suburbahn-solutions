@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suburbahn Solutions - AI Consulting & Automation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background-color: #07111f;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(7, 17, 31, 0.85);
+            backdrop-filter: blur(20px);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+        }
+
+        .logo {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.11em;
+            color: #07c8f9;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            font-size: 0.875rem;
+            color: #cbd5e1;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        .book-call-btn {
+            border-radius: 9999px;
+            border: 1px solid rgba(7, 200, 249, 0.3);
+            background-color: rgba(7, 200, 249, 0.1);
+            padding: 0.625rem 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .book-call-btn:hover {
+            background-color: rgba(7, 200, 249, 0.2);
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            gap: 3rem;
+            grid-template-columns: 1.15fr 0.85fr;
+            align-items: center;
+            padding: 5rem 1.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hero-backdrop {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 28%),
+                        radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 22%);
+            z-index: -1;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 0.375rem 1rem;
+            font-size: 0.875rem;
+            color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(7, 17, 31, 0.3);
+            margin-bottom: 1.25rem;
+        }
+
+        .badge::before {
+            content: "✓";
+            color: #07c8f9;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            margin-top: 0;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .hero-description {
+            max-width: 32rem;
+            font-size: 1.125rem;
+            line-height: 2rem;
+            color: #cbd5e1;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 9999px;
+            background-color: #ffffff;
+            color: #0b0f1a;
+            padding: 0.875rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-0.125rem);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            padding: 0.875rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2.5rem;
+            max-width: 48rem;
+        }
+
+        @media (max-width: 640px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            border-radius: 1.875rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.25rem;
+            box-shadow: 0 25px 50px -12px rgba(7, 17, 31, 0.2);
+            backdrop-filter: blur(1px);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #cbd5e1;
+            margin-top: 0.25rem;
+        }
+
+        .demo-card {
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(7, 17, 31, 0.3);
+            backdrop-filter: blur(20px);
+        }
+
+        .demo-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+        }
+
+        .demo-title-group p {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #07c8f9;
+        }
+
+        .demo-title-group h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 0.25rem;
+        }
+
+        .demo-badge {
+            border-radius: 9999px;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            background-color: rgba(16, 185, 129, 0.1);
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #10c981;
+        }
+
+        .flow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .flow-step {
+            display: flex;
+            gap: 1rem;
+            border-radius: 1.875rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #0d1728;
+            padding: 1rem;
+        }
+
+        .step-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 3rem;
+            width: 3rem;
+            flex-shrink: 0;
+            border-radius: 1rem;
+            background-color: rgba(7, 200, 249, 0.1);
+            color: #07c8f9;
+            font-size: 1.25rem;
+        }
+
+        .step-content h3 {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .step-content p {
+            font-size: 0.875rem;
+            color: #cbd5e1;
+            margin-top: 0.25rem;
+            line-height: 1.5;
+        }
+
+        .mission-section {
+            display: grid;
+            gap: 1.25rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.03);
+            padding: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            margin: 0 auto;
+            max-width: 1280px;
+        }
+
+        @media (max-width: 768px) {
+            .mission-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .mission-card {
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #0b1526;
+            padding: 1.5rem;
+        }
+
+        .mission-card:nth-child(2) {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .mission-card:nth-child(2) {
+                grid-column: auto;
+            }
+        }
+
+        .mission-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .mission-card p {
+            font-size: 1rem;
+            color: #cbd5e1;
+            line-height: 1.75;
+            margin-bottom: 0.75rem;
+        }
+
+        .mission-card p:last-child {
+            margin-bottom: 0;
+            color: #94a3b8;
+        }
+
+        section {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 5rem 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .section-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.24em;
+            color: #07c8f9;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-description {
+            max-width: 48rem;
+            font-size: 1.125rem;
+            line-height: 2rem;
+            color: #cbd5e1;
+            margin-bottom: 2.5rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(4, 1fr);
+            margin-top: 2.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .service-card {
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(7, 17, 31, 0.2);
+        }
+
+        .card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 1rem;
+            background-color: rgba(7, 200, 249, 0.1);
+            color: #07c8f9;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            font-size: 0.875rem;
+            color: #cbd5e1;
+            line-height: 1.75;
+        }
+
+        .value-section {
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(7, 17, 31, 0.2);
+        }
+
+        .value-section h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .value-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(4, 1fr);
+            margin-top: 2.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .value-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .value-card {
+            border-radius: 1.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #0b1526;
+            padding: 1.5rem;
+        }
+
+        .value-card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+
+        .value-card p {
+            font-size: 0.875rem;
+            color: #cbd5e1;
+            line-height: 1.75;
+        }
+
+        .proof-stat {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+
+        .demo-section {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #0a1424;
+            display: grid;
+            gap: 2.5rem;
+            grid-template-columns: 0.9fr 1.1fr;
+            align-items: flex-start;
+            padding: 5rem 1.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            .demo-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: #cbd5e1;
+        }
+
+        .checklist-item::before {
+            content: "✓";
+            color: #10c981;
+            font-weight: 700;
+        }
+
+        .demo-video-placeholder {
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(7, 17, 31, 0.2);
+        }
+
+        .video-container {
+            aspect-ratio: 16 / 9;
+            border-radius: 1.5rem;
+            border: 2px dashed rgba(255, 255, 255, 0.15);
+            background-color: #0b1526;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .video-content p {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.22em;
+            color: #07c8f9;
+        }
+
+        .video-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 0.75rem;
+        }
+
+        .video-content p:last-of-type {
+            max-width: 28rem;
+            margin: 0.75rem auto;
+            font-size: 0.875rem;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: normal;
+            line-height: 1.75;
+            color: #cbd5e1;
+        }
+
+        .demo-note {
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #0b1526;
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: #cbd5e1;
+            line-height: 1.75;
+            margin-top: 1.25rem;
+        }
+
+        .about-section {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #0a1424;
+            display: grid;
+            gap: 3rem;
+            grid-template-columns: 1fr 1fr;
+            padding: 5rem 1.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .about-content p {
+            font-size: 1.125rem;
+            line-height: 2rem;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .about-content p:last-child {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        .values-grid-about {
+            display: grid;
+            gap: 1.25rem;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .process-section {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(4, 1fr);
+            margin-top: 2.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .process-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .process-card {
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+        }
+
+        .process-num {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.24em;
+            color: #07c8f9;
+            margin-bottom: 1rem;
+        }
+
+        .process-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .process-card p {
+            font-size: 0.875rem;
+            color: #cbd5e1;
+            line-height: 1.75;
+        }
+
+        .contact-section {
+            border-radius: 2.25rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, #0d1b31 0%, #0a1321 100%);
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(7, 17, 31, 0.2);
+            display: grid;
+            gap: 2.5rem;
+            grid-template-columns: 0.95fr 1.05fr;
+        }
+
+        @media (max-width: 1024px) {
+            .contact-section {
+                grid-template-columns: 1fr;
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        .contact-info h2 {
+            margin-top: 0.75rem;
+        }
+
+        .contact-info > p:nth-of-type(2) {
+            max-width: 28rem;
+            font-size: 1.125rem;
+            line-height: 2rem;
+            color: #cbd5e1;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .partners-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(3, 1fr);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .partner-card {
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: #cbd5e1;
+        }
+
+        .partner-name {
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .partner-title {
+            color: #07c8f9;
+            margin-bottom: 0.75rem;
+        }
+
+        .partner-email {
+            word-break: break-all;
+            color: #cbd5e1;
+        }
+
+        .contact-note {
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            font-size: 0.875rem;
+            color: #94a3b8;
+        }
+
+        .contact-form {
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+        }
+
+        .contact-form h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form > p {
+            font-size: 0.875rem;
+            line-height: 1.75;
+            color: #cbd5e1;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 640px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, textarea {
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #0b1526;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            color: #ffffff;
+            font-family: inherit;
+            outline: none;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #64748b;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #07c8f9;
+            background-color: rgba(7, 200, 249, 0.05);
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border-radius: 9999px;
+            background-color: #ffffff;
+            color: #0b0f1a;
+            padding: 0.875rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.3s ease;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-0.125rem);
+        }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            gap: 1rem;
+            padding: 2rem 1.5rem;
+            font-size: 0.875rem;
+            color: #94a3b8;
+            flex-wrap: wrap;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .footer-content div {
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .footer-content div:nth-child(2) {
+            font-weight: 400;
+            color: #cbd5e1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="#top" class="logo">
+                <div class="logo-title">Suburbahn Solutions</div>
+                <div class="logo-subtitle">AI Consulting & Automation</div>
+            </a>
+            <nav>
+                <a href="#services">Services</a>
+                <a href="#demo">Demo</a>
+                <a href="#process">Process</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <a href="#contact" class="book-call-btn">Book a Call</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero" id="top">
+        <div class="hero-backdrop"></div>
+        <div>
+            <div class="badge">Built for service businesses and operator-led teams</div>
+            <h1>AI systems that help you respond faster, book more work, and eliminate manual follow-up.</h1>
+            <p class="hero-description">Suburbahn Solutions helps businesses automate and optimize the work that slows growth down. We build reliable AI systems that improve efficiency, save time, reduce wasted labor, strengthen follow-up, and create a more consistent path from first inquiry to booked business.</p>
+            <div class="button-group">
+                <a href="#demo" class="btn-primary">See the Demo →</a>
+                <a href="#contact" class="btn-secondary">Request a Discovery Call</a>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">Seconds</div>
+                    <div class="stat-label">Response window</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Coverage</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">Automated</div>
+                    <div class="stat-label">Less admin</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">ROI</div>
+                    <div class="stat-label">Focus</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <div class="demo-header">
+                <div class="demo-title-group">
+                    <p>Live Demo Concept</p>
+                    <h2>AI Lead Conversion Flow</h2>
+                </div>
+                <div class="demo-badge">Demo Ready</div>
+            </div>
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="step-icon">📞</div>
+                    <div class="step-content">
+                        <h3>Lead comes in</h3>
+                        <p>A prospect submits a form or inquiry from your website.</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-icon">🤖</div>
+                    <div class="step-content">
+                        <h3>AI responds instantly</h3>
+                        <p>Text or email follow-up is sent in seconds with the right message.</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-icon">🎯</div>
+                    <div class="step-content">
+                        <h3>Lead is qualified</h3>
+                        <p>The system asks a few smart questions to identify urgency and fit.</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-icon">📅</div>
+                    <div class="step-content">
+                        <h3>Meeting gets booked</h3>
+                        <p>A scheduling link moves the lead directly into your calendar.</p>
+                    </div>
+                </div>
+                <div class="flow-step">
+                    <div class="step-icon">💾</div>
+                    <div class="step-content">
+                        <h3>CRM updates automatically</h3>
+                        <p>Contact and lead details are logged without manual entry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mission Section -->
+    <section>
+        <div class="mission-section">
+            <div class="mission-card">
+                <div class="mission-icon">🏢</div>
+                <h3>Mission Statement</h3>
+                <p>At Suburbahn Solutions our mission is to provide a reliable and efficient service to help automate and optimize your business by using our core principles of innovation, reliability, and trust.</p>
+            </div>
+            <div class="mission-card">
+                <div class="mission-icon">💼</div>
+                <h3>Who we serve</h3>
+                <p>We are built for service businesses, founder-led companies, and lean operator teams that want to improve response time, reduce manual admin work, and create a more professional process for turning interest into revenue.</p>
+                <p>Our goal is simple: help businesses save time, improve efficiency, reduce avoidable cost, and create a system that helps them make more from the opportunities they already have.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div>
+            <p class="section-label">Services</p>
+            <h2>What we build</h2>
+            <p class="section-description">Our work is built around deployment, not theory. We create AI systems that improve speed, structure, and execution across your lead pipeline while helping your business save time, lower administrative burden, and improve conversion.</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="service-card">
+                <div class="card-icon">🤖</div>
+                <h3>AI Lead Response</h3>
+                <p>Instant text and email follow-up so inbound leads never sit untouched.</p>
+            </div>
+            <div class="service-card">
+                <div class="card-icon">⚙️</div>
+                <h3>Qualification Workflows</h3>
+                <p>Automated questions, routing logic, and handoffs that move prospects to the right next step.</p>
+            </div>
+            <div class="service-card">
+                <div class="card-icon">📅</div>
+                <h3>Booking Automation</h3>
+                <p>Calendar scheduling, reminders, and confirmation flows without the manual back-and-forth.</p>
+            </div>
+            <div class="service-card">
+                <div class="card-icon">💾</div>
+                <h3>CRM Integration</h3>
+                <p>Lead capture and pipeline updates automatically synced into your existing systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Section -->
+    <section>
+        <div class="value-section">
+            <div>
+                <p class="section-label">Why this matters</p>
+                <h2>The value is not just automation. It is better economics.</h2>
+                <p class="section-description">Businesses lose money when leads sit, follow-up is inconsistent, and staff spend time on repetitive administrative work. Suburbahn Solutions is designed to help teams respond faster, capture more opportunities, and spend more time on the work that actually drives revenue.</p>
+            </div>
+
+            <div class="value-grid">
+                <div class="value-card">
+                    <div class="proof-stat">100x</div>
+                    <h3>Higher contact odds</h3>
+                    <p>Leads contacted within 5 minutes are dramatically more likely to be reached than leads contacted after 30 minutes.</p>
+                </div>
+                <div class="value-card">
+                    <div class="proof-stat">21x</div>
+                    <h3>Higher qualification odds</h3>
+                    <p>Fast response does not just improve contact rates. It also materially improves the chance of qualifying the lead.</p>
+                </div>
+                <div class="value-card">
+                    <div class="proof-stat">30–45%</div>
+                    <h3>Customer-care productivity value</h3>
+                    <p>Generative AI can create meaningful productivity gains in customer care and response workflows when deployed correctly.</p>
+                </div>
+                <div class="value-card">
+                    <div class="proof-stat">12.4%</div>
+                    <h3>More time on core work</h3>
+                    <p>Research shows AI can shift time away from administrative tasks and toward higher-value work.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <div class="demo-section" id="demo">
+        <div>
+            <p class="section-label">Demo</p>
+            <h2>See the demo live on a call.</h2>
+            <p class="section-description">We walk prospects through the live demo on a call so they can see the system in action, ask questions in real time, and understand exactly how the workflow would fit into their business.</p>
+            <div class="checklist">
+                <div class="checklist-item">Submit a lead through your quote form</div>
+                <div class="checklist-item">Trigger an instant AI text or email response</div>
+                <div class="checklist-item">Ask one or two qualification questions</div>
+                <div class="checklist-item">Send a booking link automatically</div>
+                <div class="checklist-item">Show the lead appear in your pipeline</div>
+            </div>
+        </div>
+
+        <div class="demo-video-placeholder">
+            <div class="video-container">
+                <div class="video-content">
+                    <p>Live walkthrough</p>
+                    <h3>Demo provided on call</h3>
+                    <p>We use the call to walk prospects through the workflow live, answer questions, and show how the system can be tailored to their specific business.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Process Section -->
+    <section id="process">
+        <div>
+            <p class="section-label">Process</p>
+            <h2>A structured path from idea to implementation.</h2>
+            <p class="section-description">We use a clear rollout process so the work stays grounded in your operations and tied to measurable outcomes.</p>
+        </div>
+
+        <div class="process-section">
+            <div class="process-card">
+                <div class="process-num">01</div>
+                <h3>Discovery</h3>
+                <p>We map your current lead flow, response gaps, admin burden, and bottlenecks.</p>
+            </div>
+            <div class="process-card">
+                <div class="process-num">02</div>
+                <h3>System Design</h3>
+                <p>We design a practical automation plan around your business, tools, and customer journey.</p>
+            </div>
+            <div class="process-card">
+                <div class="process-num">03</div>
+                <h3>Implementation</h3>
+                <p>We connect forms, messaging, AI prompts, booking tools, and CRM workflows into one system.</p>
+            </div>
+            <div class="process-card">
+                <div class="process-num">04</div>
+                <h3>Optimization</h3>
+                <p>We refine the workflow, tighten messaging, and improve conversion over time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <div class="about-section" id="about">
+        <div class="about-content">
+            <p class="section-label">About</p>
+            <h2>Built on practical execution.</h2>
+            <p>Suburbahn Solutions was created to help businesses use AI in a way that is clean, useful, and tied to actual business outcomes. We focus on systems that shorten response times, improve follow-up, reduce repetitive administrative work, and create a more profitable operating rhythm.</p>
+            <p>We believe the strongest AI solutions are not the most complicated. They are the ones that reliably save time, improve professionalism, increase efficiency, and help businesses get more out of the leads and labor they already have.</p>
+        </div>
+
+        <div class="values-grid-about">
+            <div class="value-card">
+                <h3>Efficiency</h3>
+                <p>We focus on systems that remove friction, reduce delays, and help businesses move faster.</p>
+            </div>
+            <div class="value-card">
+                <h3>Professionalism</h3>
+                <p>Every client touchpoint should feel polished, timely, and trustworthy.</p>
+            </div>
+            <div class="value-card">
+                <h3>Quality</h3>
+                <p>We care about clean execution, dependable systems, and deliverables that actually work.</p>
+            </div>
+            <div class="value-card">
+                <h3>Optimization</h3>
+                <p>We continuously improve workflows so the business gets more output from the same effort.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-section">
+            <div class="contact-info">
+                <p class="section-label">Contact</p>
+                <h2>Let's build something practical.</h2>
+                <p>Reach out and we'll talk through your current process, your goals, and where AI and automation can realistically create value.</p>
+
+                <div class="partners-grid">
+                    <div class="partner-card">
+                        <div class="partner-name">Cole Heilig</div>
+                        <div class="partner-title">Managing Partner</div>
+                        <div class="partner-email">ColeSuburbahnSolutions@Outlook.com</div>
+                    </div>
+                    <div class="partner-card">
+                        <div class="partner-name">Will Christie</div>
+                        <div class="partner-title">Managing Partner</div>
+                        <div class="partner-email">WillSuburbahnSolutions@Outlook.com</div>
+                    </div>
+                    <div class="partner-card">
+                        <div class="partner-name">Landon Lawson</div>
+                        <div class="partner-title">Partner</div>
+                        <div class="partner-email">LandonSuburbahnSolutions@Outlook.com</div>
+                    </div>
+                </div>
+
+                <div class="contact-note">
+                    Reach out directly to any partner or use the inquiry form to start the conversation.
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3>Contact form</h3>
+                <p>Use this form to tell us about your business, your current workflow, and where you think time and money are being lost. Once the backend is connected, submissions can be delivered directly to your inbox.</p>
+
+                <form action="thank-you.html" method="GET" class="form-grid">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" name="firstName" placeholder="First name" required aria-label="First name">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="lastName" placeholder="Last name" required aria-label="Last name">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Email address" required aria-label="Email address">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="company" placeholder="Company" aria-label="Company">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number">
+                    </div>
+
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Tell us about your business, your current workflow, and what you want to improve." required aria-label="Message"></textarea>
+                    </div>
+
+                    <button type="submit" class="form-submit">Send inquiry →</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>Suburbahn Solutions</div>
+            <div>AI Consulting & Automation</div>
+        </div>
+        <div>© 2026 Suburbahn Solutions. All rights reserved.</div>
+    </footer>
+</body>
+</html>
