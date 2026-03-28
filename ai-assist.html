@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assist | Suburbahn Solutions</title>
+    <meta name="description" content="AI Assist by Suburbahn Solutions brings Jonny, a guided AI chat assistant for service businesses, to help with leads, automation, and operations.">
+    <link rel="canonical" href="https://suburbahnsolutions.com/ai-assist.html">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background-color: #07111f;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(7, 17, 31, 0.85);
+            backdrop-filter: blur(20px);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+        }
+
+        .logo {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            letter-spacing: 0.025em;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.11em;
+            color: #07c8f9;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            font-size: 0.875rem;
+            color: #cbd5e1;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        .book-call-btn {
+            border-radius: 9999px;
+            border: 1px solid rgba(7, 200, 249, 0.3);
+            background-color: rgba(7, 200, 249, 0.1);
+            padding: 0.625rem 1.25rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .book-call-btn:hover {
+            background-color: rgba(7, 200, 249, 0.2);
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            gap: 3rem;
+            grid-template-columns: 1.15fr 0.85fr;
+            align-items: center;
+            padding: 5rem 1.5rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hero-backdrop {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(7, 200, 249, 0.16), transparent 28%),
+                        radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 22%);
+            z-index: -1;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 0.375rem 1rem;
+            font-size: 0.875rem;
+            color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(7, 17, 31, 0.3);
+            margin-bottom: 1.25rem;
+        }
+
+        .badge::before {
+            content: "✓";
+            color: #07c8f9;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            margin-top: 0;
+            line-height: 1.1;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2.25rem;
+            }
+        }
+
+        .hero-description {
+            max-width: 32rem;
+            font-size: 1.125rem;
+            line-height: 2rem;
+            color: #cbd5e1;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            padding: 0.875rem 1.5rem;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #ffffff;
+            color: #0b0f1a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-0.125rem);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .section {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        .section-heading {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            max-width: 42rem;
+            color: #cbd5e1;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .section-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .feature-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .feature-card,
+        .step-card,
+        .contact-card {
+            border-radius: 1.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.75rem;
+            box-shadow: 0 25px 50px -12px rgba(7, 17, 31, 0.2);
+            backdrop-filter: blur(20px);
+        }
+
+        .feature-card h3,
+        .step-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p,
+        .step-card p,
+        .contact-card p {
+            color: #cbd5e1;
+            line-height: 1.75;
+        }
+
+        .feature-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(7, 200, 249, 0.12);
+            color: #07c8f9;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            color: #ffffff;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .highlight-panel {
+            border-radius: 2rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(7, 17, 31, 0.18);
+        }
+
+        .highlight-panel h2,
+        .hero h1 {
+            letter-spacing: -0.04em;
+        }
+
+        @media (max-width: 1024px) {
+            .feature-grid,
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+
+            .hero {
+                padding: 3rem 1.25rem;
+            }
+        }
+
+        .contact-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-panel a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/" class="logo">
+                <div class="logo-title">Suburbahn Solutions</div>
+                <div class="logo-subtitle">AI Consulting & Automation</div>
+            </a>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/ai-consulting-oklahoma-city">OKC AI</a>
+                <a href="/ai-assist.html">AI Assist</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <a href="#contact" class="book-call-btn">Book a Call</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div>
+                <div class="badge">Jonny — AI assistant for service businesses</div>
+                <h1>Make faster lead follow-up and operations decisions with AI.</h1>
+                <p class="hero-description">Jonny is your Suburbahn AI assistant for contractors and local service teams. Use the chat widget to explore automation, lead response, and smarter workflows in minutes.</p>
+                <div class="button-group">
+                    <button class="btn-primary" type="button" onclick="openSuburbahnChatbot()">Open Jonny</button>
+                    <a href="#how-it-works" class="btn-secondary">How it works</a>
+                </div>
+            </div>
+            <div class="highlight-panel">
+                <h2>Ready to test Jonny?</h2>
+                <p>Open the assistant and ask for real next steps on lead intake, booking, follow-up, or field team coordination. Jonny is tuned for service businesses, not generic AI copy.</p>
+            </div>
+        </section>
+
+        <section class="section" id="how-it-works">
+            <h2 class="section-heading">How Jonny helps your business</h2>
+            <p class="section-description">A modern assistant built to answer the questions service businesses care about: faster leads, better response, smoother booking, and automation that pays back quickly.</p>
+            <div class="section-grid feature-grid">
+                <div class="feature-card">
+                    <div class="feature-number">1</div>
+                    <h3 class="feature-title">Answer lead questions instantly</h3>
+                    <p>Jonny reviews common customer questions and gives your team faster direction on availability, pricing, and next steps.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">2</div>
+                    <h3 class="feature-title">Spot automation opportunities</h3>
+                    <p>Ask Jonny how to automate booking, follow-up, reminders, and handoffs between office and field teams.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">3</div>
+                    <h3 class="feature-title">Improve operations with real examples</h3>
+                    <p>Get practical suggestions for workflows that reduce admin time, increase response speed, and help your crew stay on schedule.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="highlight-panel">
+                <h2 class="section-heading">Use Jonny for these common service business goals</h2>
+                <div class="section-grid grid-2">
+                    <div class="feature-card">
+                        <h3 class="feature-title">Lead response</h3>
+                        <p>See how faster follow-up improves conversion on estimates, calls, and website leads.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Automation planning</h3>
+                        <p>Ask what to automate first so your team spends less time on repetitive tasks and more time closing jobs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <h2 class="section-heading">Ready to talk about AI for your business?</h2>
+            <p class="section-description">Use Jonny to explore the best automation ideas, then contact Suburbahn Solutions to build the strategy and implementation plan.</p>
+            <div class="contact-panel">
+                <a href="tel:(405) 555-0100">Call (405) 555-0100</a>
+                <a href="mailto:hello@suburbahnsolutions.com">hello@suburbahnsolutions.com</a>
+            </div>
+        </section>
+    </main>
+
+    <div id="sb-chatbot-backdrop" onclick="closeSuburbahnChatbot()"></div>
+
+    <button id="sb-chatbot-button" type="button" onclick="toggleSuburbahnChatbot()" aria-label="Open Jonny">
+        <span id="sb-chatbot-button-dot"></span>
+        <span>Ask Jonny</span>
+    </button>
+
+    <div id="sb-chatbot-window" aria-hidden="true">
+        <div id="sb-chatbot-header">
+            <div id="sb-chatbot-title-wrap">
+                <span id="sb-chatbot-title-dot"></span>
+                <div>
+                    <div id="sb-chatbot-title">Jonny</div>
+                    <span id="sb-chatbot-subtitle">Ask about automation, leads, and operations</span>
+                </div>
+            </div>
+            <div id="sb-chatbot-controls">
+                <button class="sb-chatbot-control-btn" type="button" onclick="closeSuburbahnChatbot()" aria-label="Close chatbot">
+                    &times;
+                </button>
+            </div>
+        </div>
+        <div id="sb-chatbot-body">
+            <div id="sb-chatbot-loading">Loading assistant...</div>
+            <iframe
+                id="sb-chatbot-iframe"
+                src="https://vercel-ai-gateway-demo-rhxnvso5l-cole-heiligs-projects.vercel.app/"
+                title="Suburbahn Solutions Jonny Assistant"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                onload="hideSuburbahnChatbotLoader()"
+            ></iframe>
+        </div>
+    </div>
+
+    <script>
+        const sbChatbotWindow = document.getElementById("sb-chatbot-window");
+        const sbChatbotBackdrop = document.getElementById("sb-chatbot-backdrop");
+        const sbChatbotLoading = document.getElementById("sb-chatbot-loading");
+
+        function openSuburbahnChatbot() {
+            sbChatbotWindow.style.display = "flex";
+            sbChatbotBackdrop.style.display = "block";
+            sbChatbotWindow.setAttribute("aria-hidden", "false");
+        }
+
+        function closeSuburbahnChatbot() {
+            sbChatbotWindow.style.display = "none";
+            sbChatbotBackdrop.style.display = "none";
+            sbChatbotWindow.setAttribute("aria-hidden", "true");
+        }
+
+        function toggleSuburbahnChatbot() {
+            const isOpen = sbChatbotWindow.style.display === "flex";
+            if (isOpen) {
+                closeSuburbahnChatbot();
+            } else {
+                openSuburbahnChatbot();
+            }
+        }
+
+        function hideSuburbahnChatbotLoader() {
+            if (sbChatbotLoading) {
+                sbChatbotLoading.style.display = "none";
+            }
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                closeSuburbahnChatbot();
+            }
+        });
+    </script>
+</body>
+</html>
