@@ -944,6 +944,7 @@
                 <a href="#services">Services</a>
                 <a href="#demo">Demo</a>
                 <a href="/ai-consulting-oklahoma-city">OKC AI</a>
+                <a href="/ai-assist.html">AI Assist</a>
                 <a href="#process">Process</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
@@ -1281,9 +1282,26 @@
         <div>© 2026 Suburbahn Solutions. All rights reserved.</div>
     </footer>
 
-    <!-- Suburbahn Solutions AI Chatbot Widget -->
+    <!-- Suburbahn Solutions Scripted Chat Widget -->
     <style>
-      #sb-chatbot-button {
+      #sb-chat-launch-text {
+        position: fixed;
+        right: 20px;
+        bottom: 78px;
+        z-index: 99997;
+        background: rgba(17, 24, 39, 0.95);
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.35;
+        padding: 10px 12px;
+        border-radius: 12px;
+        max-width: 260px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+      }
+
+      #sb-chat-button {
         position: fixed;
         right: 20px;
         bottom: 20px;
@@ -1301,15 +1319,16 @@
         font-weight: 700;
         cursor: pointer;
         box-shadow: 0 14px 35px rgba(0, 0, 0, 0.22);
-        transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
 
-      #sb-chatbot-button:hover {
+      #sb-chat-button:hover {
         transform: translateY(-2px);
         box-shadow: 0 18px 40px rgba(0, 0, 0, 0.26);
       }
 
-      #sb-chatbot-button-dot {
+      #sb-chat-button-dot,
+      #sb-chat-title-dot {
         width: 10px;
         height: 10px;
         border-radius: 50%;
@@ -1317,12 +1336,12 @@
         flex-shrink: 0;
       }
 
-      #sb-chatbot-window {
+      #sb-chat-window {
         position: fixed;
         right: 20px;
-        bottom: 80px;
+        bottom: 20px;
         width: 390px;
-        height: 640px;
+        height: 680px;
         z-index: 99998;
         display: none;
         flex-direction: column;
@@ -1331,198 +1350,462 @@
         background: #ffffff;
         border: 1px solid #e5e7eb;
         box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
-      }
-
-      #sb-chatbot-header {
-        height: 58px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 16px;
-        background: #111827;
-        color: #ffffff;
         font-family: Arial, sans-serif;
       }
 
-      #sb-chatbot-title-wrap {
+      #sb-chat-header {
+        background: #111827;
+        color: #ffffff;
+        padding: 14px 16px 12px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      #sb-chat-header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      #sb-chat-title-wrap {
         display: flex;
         align-items: center;
         gap: 10px;
-        min-width: 0;
       }
 
-      #sb-chatbot-title-dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: #22c55e;
-        flex-shrink: 0;
-      }
-
-      #sb-chatbot-title {
+      #sb-chat-title {
         font-size: 15px;
         font-weight: 700;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
 
-      #sb-chatbot-subtitle {
-        display: block;
-        font-size: 11px;
-        font-weight: 400;
-        opacity: 0.82;
-        margin-top: 1px;
-      }
-
-      #sb-chatbot-controls {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .sb-chatbot-control-btn {
+      #sb-chat-close {
         appearance: none;
         border: none;
         background: transparent;
         color: #ffffff;
-        font-size: 20px;
+        font-size: 22px;
         line-height: 1;
         cursor: pointer;
-        opacity: 0.92;
         padding: 0;
       }
 
-      .sb-chatbot-control-btn:hover {
-        opacity: 1;
+      #sb-chat-subtitle {
+        margin-top: 8px;
+        font-size: 12px;
+        line-height: 1.4;
+        color: rgba(255, 255, 255, 0.88);
       }
 
-      #sb-chatbot-body {
-        position: relative;
+      #sb-chat-messages {
         flex: 1;
-        background: #ffffff;
+        overflow-y: auto;
+        padding: 16px;
+        background: #f9fafb;
       }
 
-      #sb-chatbot-loading {
-        position: absolute;
-        inset: 0;
+      .sb-msg {
+        margin-bottom: 12px;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #ffffff;
-        color: #6b7280;
-        font-family: Arial, sans-serif;
+      }
+
+      .sb-msg.sb-user {
+        justify-content: flex-end;
+      }
+
+      .sb-bubble {
+        max-width: 85%;
+        padding: 10px 12px;
+        border-radius: 14px;
         font-size: 14px;
-        z-index: 2;
+        line-height: 1.45;
+        white-space: pre-line;
       }
 
-      #sb-chatbot-iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-        display: block;
+      .sb-ai .sb-bubble {
+        background: #e5e7eb;
+        color: #111827;
+        border-radius: 14px 14px 14px 4px;
+      }
+
+      .sb-user .sb-bubble {
+        background: #111827;
+        color: #ffffff;
+        border-radius: 14px 14px 4px 14px;
+      }
+
+      #sb-chat-options {
+        padding: 0 16px 12px 16px;
+        background: #f9fafb;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .sb-option-btn {
+        border: 1px solid #d1d5db;
+        background: #ffffff;
+        color: #111827;
+        padding: 8px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: background 0.15s ease, border-color 0.15s ease;
+      }
+
+      .sb-option-btn:hover {
+        background: #f3f4f6;
+        border-color: #9ca3af;
+      }
+
+      #sb-chat-input-wrap {
+        display: flex;
+        gap: 8px;
+        padding: 12px;
+        border-top: 1px solid #e5e7eb;
         background: #ffffff;
       }
 
-      #sb-chatbot-backdrop {
-        position: fixed;
-        inset: 0;
-        z-index: 99997;
-        display: none;
-        background: rgba(0, 0, 0, 0.18);
+      #sb-chat-input {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+        font-size: 14px;
+        outline: none;
+      }
+
+      #sb-chat-send {
+        padding: 12px 14px;
+        border: none;
+        border-radius: 10px;
+        background: #111827;
+        color: #ffffff;
+        cursor: pointer;
+        font-weight: 700;
       }
 
       @media (max-width: 640px) {
-        #sb-chatbot-button {
-          right: 12px;
-          bottom: 12px;
-          padding: 12px 16px;
-          font-size: 13px;
+        #sb-chat-launch-text {
+          right: 10px;
+          bottom: 74px;
+          max-width: calc(100vw - 90px);
+          font-size: 12px;
+          padding: 9px 11px;
         }
 
-        #sb-chatbot-window {
+        #sb-chat-button {
           right: 10px;
-          bottom: 68px;
+          bottom: 10px;
+          font-size: 13px;
+          padding: 12px 16px;
+        }
+
+        #sb-chat-window {
+          right: 10px;
+          bottom: 10px;
           width: calc(100vw - 20px);
-          height: 78vh;
-          max-height: 720px;
+          height: 82vh;
           border-radius: 16px;
         }
       }
     </style>
 
-    <div id="sb-chatbot-backdrop" onclick="closeSuburbahnChatbot()"></div>
+    <div id="sb-chat-launch-text">
+      Get a custom AI plan in under 60 seconds.
+    </div>
 
-    <button id="sb-chatbot-button" type="button" onclick="toggleSuburbahnChatbot()" aria-label="Open AI Assistant">
-      <span id="sb-chatbot-button-dot"></span>
-      <span>AI Assistant</span>
+    <button id="sb-chat-button" type="button" onclick="toggleSBChat()" aria-label="Open AI chatbot">
+      <span id="sb-chat-button-dot"></span>
+      <span>Get My AI Plan</span>
     </button>
 
-    <div id="sb-chatbot-window" aria-hidden="true">
-      <div id="sb-chatbot-header">
-        <div id="sb-chatbot-title-wrap">
-          <span id="sb-chatbot-title-dot"></span>
-          <div>
-            <div id="sb-chatbot-title">Suburbahn AI Assistant</div>
-            <span id="sb-chatbot-subtitle">Ask about automation, leads, and operations</span>
+    <div id="sb-chat-window" aria-hidden="true">
+      <div id="sb-chat-header">
+        <div id="sb-chat-header-top">
+          <div id="sb-chat-title-wrap">
+            <span id="sb-chat-title-dot"></span>
+            <div id="sb-chat-title">Suburbahn AI Assistant</div>
           </div>
-        </div>
-
-        <div id="sb-chatbot-controls">
-          <button class="sb-chatbot-control-btn" type="button" onclick="closeSuburbahnChatbot()" aria-label="Close chatbot">
-            &times;
+          <button id="sb-chat-close" type="button" onclick="closeSBChat()" aria-label="Close chatbot">
+            ×
           </button>
+        </div>
+        <div id="sb-chat-subtitle">
+          Short answers. Clear next steps. Built to help you identify automation opportunities.
         </div>
       </div>
 
-      <div id="sb-chatbot-body">
-        <div id="sb-chatbot-loading">Loading assistant...</div>
-        <iframe
-          id="sb-chatbot-iframe"
-          src="https://chat.suburbahnsolutions.com"
-          title="Suburbahn Solutions AI Assistant"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-          onload="hideSuburbahnChatbotLoader()"
-        ></iframe>
+      <div id="sb-chat-messages"></div>
+      <div id="sb-chat-options"></div>
+
+      <div id="sb-chat-input-wrap">
+        <input
+          id="sb-chat-input"
+          type="text"
+          placeholder="Ask about leads, automation, or operations..."
+        />
+        <button id="sb-chat-send" type="button" onclick="sendSBFreeText()">Send</button>
       </div>
     </div>
 
     <script>
-      const sbChatbotWindow = document.getElementById("sb-chatbot-window");
-      const sbChatbotBackdrop = document.getElementById("sb-chatbot-backdrop");
-      const sbChatbotLoading = document.getElementById("sb-chatbot-loading");
+      const sbChatWindow = document.getElementById("sb-chat-window");
+      const sbChatLaunchText = document.getElementById("sb-chat-launch-text");
+      const sbMessages = document.getElementById("sb-chat-messages");
+      const sbOptions = document.getElementById("sb-chat-options");
+      const sbInput = document.getElementById("sb-chat-input");
 
-      function openSuburbahnChatbot() {
-        sbChatbotWindow.style.display = "flex";
-        sbChatbotBackdrop.style.display = "block";
-        sbChatbotWindow.setAttribute("aria-hidden", "false");
+      const contactLine = "The best next step is to get in touch with us directly through the website contact form so we can build a custom plan for your business.";
+
+      const chatbotFlow = {
+        start: {
+          bot: "Hi — I help service businesses identify lead leaks and automation opportunities. What type of business do you run?",
+          options: [
+            { label: "HVAC", next: "hvac" },
+            { label: "Roofing", next: "roofing" },
+            { label: "Electrical", next: "electrical" },
+            { label: "Other", next: "otherBusiness" }
+          ]
+        },
+        hvac: {
+          bot: "HVAC businesses usually benefit most from faster lead response, missed-call follow-up, and scheduling automation. About how many leads do you get each month?\n\n" + contactLine,
+          options: [
+            { label: "0–20", next: "leadLow" },
+            { label: "20–50", next: "leadMid" },
+            { label: "50+", next: "leadHigh" }
+          ]
+        },
+        roofing: {
+          bot: "Roofing businesses often lose opportunities through slow follow-up and inconsistent estimate workflows. About how many leads do you get each month?\n\n" + contactLine,
+          options: [
+            { label: "0–20", next: "leadLow" },
+            { label: "20–50", next: "leadMid" },
+            { label: "50+", next: "leadHigh" }
+          ]
+        },
+        electrical: {
+          bot: "Electrical contractors usually see strong ROI from lead capture, scheduling automation, and admin workflow cleanup. About how many leads do you get each month?\n\n" + contactLine,
+          options: [
+            { label: "0–20", next: "leadLow" },
+            { label: "20–50", next: "leadMid" },
+            { label: "50+", next: "leadHigh" }
+          ]
+        },
+        otherBusiness: {
+          bot: "That still sounds like a good fit if your business handles inbound leads, follow-up, or repetitive admin work. What is your biggest bottleneck right now?\n\n" + contactLine,
+          options: [
+            { label: "Missed leads", next: "missedLeads" },
+            { label: "Slow follow-up", next: "slowFollowUp" },
+            { label: "Scheduling", next: "scheduling" },
+            { label: "Admin overload", next: "adminOverload" }
+          ]
+        },
+        leadLow: {
+          bot: "At that volume, the goal is usually tighter response time and cleaner follow-up so every lead counts. What is your biggest bottleneck right now?\n\n" + contactLine,
+          options: [
+            { label: "Missed leads", next: "missedLeads" },
+            { label: "Slow follow-up", next: "slowFollowUp" },
+            { label: "Scheduling", next: "scheduling" },
+            { label: "Admin overload", next: "adminOverload" }
+          ]
+        },
+        leadMid: {
+          bot: "That is enough lead flow for automation to have a real impact on conversion and efficiency. What is your biggest bottleneck right now?\n\n" + contactLine,
+          options: [
+            { label: "Missed leads", next: "missedLeads" },
+            { label: "Slow follow-up", next: "slowFollowUp" },
+            { label: "Scheduling", next: "scheduling" },
+            { label: "Admin overload", next: "adminOverload" }
+          ]
+        },
+        leadHigh: {
+          bot: "At that volume, speed-to-lead and process automation matter a lot because small leaks become expensive fast. What is your biggest bottleneck right now?\n\n" + contactLine,
+          options: [
+            { label: "Missed leads", next: "missedLeads" },
+            { label: "Slow follow-up", next: "slowFollowUp" },
+            { label: "Scheduling", next: "scheduling" },
+            { label: "Admin overload", next: "adminOverload" }
+          ]
+        },
+        missedLeads: {
+          bot: "Missed leads usually point to weak intake, missed-call handling, or lack of instant follow-up. We should look at lead capture and response automation first.\n\n" + contactLine,
+          options: [
+            { label: "How can automation help?", next: "automationHelp" },
+            { label: "What do you build?", next: "whatWeBuild" },
+            { label: "How do I get started?", next: "getStarted" }
+          ]
+        },
+        slowFollowUp: {
+          bot: "Slow follow-up is one of the biggest revenue leaks for service businesses. Automated responses, lead routing, and reminders usually fix that quickly.\n\n" + contactLine,
+          options: [
+            { label: "How can automation help?", next: "automationHelp" },
+            { label: "What do you build?", next: "whatWeBuild" },
+            { label: "How do I get started?", next: "getStarted" }
+          ]
+        },
+        scheduling: {
+          bot: "Scheduling issues usually come from manual back-and-forth and disconnected systems. We typically solve that with booking workflows, reminders, and routing automation.\n\n" + contactLine,
+          options: [
+            { label: "How can automation help?", next: "automationHelp" },
+            { label: "What do you build?", next: "whatWeBuild" },
+            { label: "How do I get started?", next: "getStarted" }
+          ]
+        },
+        adminOverload: {
+          bot: "Admin overload is usually a sign that the business has repetitive work that should be automated or systemized. That often creates both time savings and better lead handling.\n\n" + contactLine,
+          options: [
+            { label: "How can automation help?", next: "automationHelp" },
+            { label: "What do you build?", next: "whatWeBuild" },
+            { label: "How do I get started?", next: "getStarted" }
+          ]
+        },
+        automationHelp: {
+          bot: "Automation can help by responding faster, reducing manual work, and keeping leads from slipping through the cracks. The best next move is to contact us so we can map the right system for your business.",
+          options: [
+            { label: "What do you build?", next: "whatWeBuild" },
+            { label: "How do I get started?", next: "getStarted" },
+            { label: "Contact info", next: "contactInfo" }
+          ]
+        },
+        whatWeBuild: {
+          bot: "We help businesses improve lead capture, follow-up, scheduling, and internal workflows using automation. The best next step is to contact us directly so we can recommend the right setup.",
+          options: [
+            { label: "How do I get started?", next: "getStarted" },
+            { label: "Who is this for?", next: "whoItsFor" },
+            { label: "Contact info", next: "contactInfo" }
+          ]
+        },
+        whoItsFor: {
+          bot: "This is usually a strong fit for service businesses that rely on inbound leads, appointment flow, and repetitive admin tasks. The right next step is to contact us so we can see if there is a fit.",
+          options: [
+            { label: "How can I get started?", next: "getStarted" },
+            { label: "What problems do you solve?", next: "problemsWeSolve" },
+            { label: "Contact info", next: "contactInfo" }
+          ]
+        },
+        problemsWeSolve: {
+          bot: "We usually help with missed leads, slow response time, scheduling friction, and operational inefficiencies. Contact us directly and we can outline the highest-value fixes for your business.",
+          options: [
+            { label: "How can I get started?", next: "getStarted" },
+            { label: "What do you build?", next: "whatWeBuild" },
+            { label: "Contact info", next: "contactInfo" }
+          ]
+        },
+        getStarted: {
+          bot: "The fastest way to get started is to contact us through the website so we can learn about your business and build a custom plan. Include your company name, lead volume, and biggest bottleneck.",
+          options: [
+            { label: "Contact info", next: "contactInfo" },
+            { label: "Restart", next: "start" }
+          ]
+        },
+        contactInfo: {
+          bot: "Please use the website contact form or reach out directly through your contact page. Include your business type, approximate lead volume, and biggest issue so we can get back to you with a tailored recommendation.",
+          options: [
+            { label: "Restart", next: "start" }
+          ]
+        },
+        fallback: {
+          bot: "That sounds like something we can likely help with. The best next step is to contact us directly through the website so we can give you a custom recommendation.",
+          options: [
+            { label: "How can I get started?", next: "getStarted" },
+            { label: "What do you build?", next: "whatWeBuild" },
+            { label: "Restart", next: "start" }
+          ]
+        }
+      };
+
+      function addSBMessage(role, text) {
+        const row = document.createElement("div");
+        row.className = `sb-msg ${role === "user" ? "sb-user" : "sb-ai"}`;
+
+        const bubble = document.createElement("div");
+        bubble.className = "sb-bubble";
+        bubble.textContent = text;
+
+        row.appendChild(bubble);
+        sbMessages.appendChild(row);
+        sbMessages.scrollTop = sbMessages.scrollHeight;
       }
 
-      function closeSuburbahnChatbot() {
-        sbChatbotWindow.style.display = "none";
-        sbChatbotBackdrop.style.display = "none";
-        sbChatbotWindow.setAttribute("aria-hidden", "true");
+      function renderOptions(options) {
+        sbOptions.innerHTML = "";
+        (options || []).forEach(option => {
+          const btn = document.createElement("button");
+          btn.className = "sb-option-btn";
+          btn.textContent = option.label;
+          btn.onclick = () => {
+            addSBMessage("user", option.label);
+            goToNode(option.next);
+          };
+          sbOptions.appendChild(btn);
+        });
       }
 
-      function toggleSuburbahnChatbot() {
-        const isOpen = sbChatbotWindow.style.display === "flex";
+      function goToNode(nodeKey) {
+        const node = chatbotFlow[nodeKey] || chatbotFlow.fallback;
+        setTimeout(() => {
+          addSBMessage("assistant", node.bot);
+          renderOptions(node.options);
+        }, 350);
+      }
+
+      function openSBChat() {
+        sbChatWindow.style.display = "flex";
+        sbChatWindow.setAttribute("aria-hidden", "false");
+        if (sbChatLaunchText) sbChatLaunchText.style.display = "none";
+
+        if (!sbMessages.dataset.started) {
+          sbMessages.dataset.started = "true";
+          goToNode("start");
+        }
+      }
+
+      function closeSBChat() {
+        sbChatWindow.style.display = "none";
+        sbChatWindow.setAttribute("aria-hidden", "true");
+      }
+
+      function toggleSBChat() {
+        const isOpen = sbChatWindow.style.display === "flex";
         if (isOpen) {
-          closeSuburbahnChatbot();
+          closeSBChat();
         } else {
-          openSuburbahnChatbot();
+          openSBChat();
         }
       }
 
-      function hideSuburbahnChatbotLoader() {
-        if (sbChatbotLoading) {
-          sbChatbotLoading.style.display = "none";
-        }
+      function sendSBFreeText() {
+        const text = sbInput.value.trim();
+        if (!text) return;
+
+        addSBMessage("user", text);
+        sbInput.value = "";
+
+        const lower = text.toLowerCase();
+
+        if (lower.includes("hvac")) return goToNode("hvac");
+        if (lower.includes("roof")) return goToNode("roofing");
+        if (lower.includes("electric")) return goToNode("electrical");
+        if (lower.includes("missed lead") || lower.includes("lead")) return goToNode("missedLeads");
+        if (lower.includes("follow")) return goToNode("slowFollowUp");
+        if (lower.includes("schedule") || lower.includes("booking")) return goToNode("scheduling");
+        if (lower.includes("admin") || lower.includes("office") || lower.includes("manual")) return goToNode("adminOverload");
+        if (lower.includes("start") || lower.includes("get started")) return goToNode("getStarted");
+        if (lower.includes("contact")) return goToNode("contactInfo");
+        if (lower.includes("what do you do") || lower.includes("what do you build") || lower.includes("services")) return goToNode("whatWeBuild");
+
+        goToNode("fallback");
       }
+
+      sbInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          sendSBFreeText();
+        }
+      });
 
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
-          closeSuburbahnChatbot();
+          closeSBChat();
         }
       });
     </script>
