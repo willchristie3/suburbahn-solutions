@@ -1016,5 +1016,251 @@
             <p>Suburbahn Solutions | AI consulting Oklahoma City | Serving the OKC metro with automation and lead follow-up systems.</p>
         </div>
     </footer>
+
+    <!-- Suburbahn Solutions AI Chatbot Widget -->
+    <style>
+      #sb-chatbot-button {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 99999;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 18px;
+        border: none;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #111827, #1f2937);
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 14px 35px rgba(0, 0, 0, 0.22);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      }
+
+      #sb-chatbot-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.26);
+      }
+
+      #sb-chatbot-button-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #22c55e;
+        flex-shrink: 0;
+      }
+
+      #sb-chatbot-window {
+        position: fixed;
+        right: 20px;
+        bottom: 80px;
+        width: 390px;
+        height: 640px;
+        z-index: 99998;
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        border-radius: 18px;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+      }
+
+      #sb-chatbot-header {
+        height: 58px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        background: #111827;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+      }
+
+      #sb-chatbot-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      #sb-chatbot-title-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #22c55e;
+        flex-shrink: 0;
+      }
+
+      #sb-chatbot-title {
+        font-size: 15px;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      #sb-chatbot-subtitle {
+        display: block;
+        font-size: 11px;
+        font-weight: 400;
+        opacity: 0.82;
+        margin-top: 1px;
+      }
+
+      #sb-chatbot-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .sb-chatbot-control-btn {
+        appearance: none;
+        border: none;
+        background: transparent;
+        color: #ffffff;
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+        opacity: 0.92;
+        padding: 0;
+      }
+
+      .sb-chatbot-control-btn:hover {
+        opacity: 1;
+      }
+
+      #sb-chatbot-body {
+        position: relative;
+        flex: 1;
+        background: #ffffff;
+      }
+
+      #sb-chatbot-loading {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        color: #6b7280;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        z-index: 2;
+      }
+
+      #sb-chatbot-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+        background: #ffffff;
+      }
+
+      #sb-chatbot-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 99997;
+        display: none;
+        background: rgba(0, 0, 0, 0.18);
+      }
+
+      @media (max-width: 640px) {
+        #sb-chatbot-button {
+          right: 12px;
+          bottom: 12px;
+          padding: 12px 16px;
+          font-size: 13px;
+        }
+
+        #sb-chatbot-window {
+          right: 10px;
+          bottom: 68px;
+          width: calc(100vw - 20px);
+          height: 78vh;
+          max-height: 720px;
+          border-radius: 16px;
+        }
+      }
+    </style>
+
+    <div id="sb-chatbot-backdrop" onclick="closeSuburbahnChatbot()"></div>
+
+    <button id="sb-chatbot-button" type="button" onclick="toggleSuburbahnChatbot()" aria-label="Open AI Assistant">
+      <span id="sb-chatbot-button-dot"></span>
+      <span>AI Assistant</span>
+    </button>
+
+    <div id="sb-chatbot-window" aria-hidden="true">
+      <div id="sb-chatbot-header">
+        <div id="sb-chatbot-title-wrap">
+          <span id="sb-chatbot-title-dot"></span>
+          <div>
+            <div id="sb-chatbot-title">Suburbahn AI Assistant</div>
+            <span id="sb-chatbot-subtitle">Ask about automation, leads, and operations</span>
+          </div>
+        </div>
+
+        <div id="sb-chatbot-controls">
+          <button class="sb-chatbot-control-btn" type="button" onclick="closeSuburbahnChatbot()" aria-label="Close chatbot">
+            &times;
+          </button>
+        </div>
+      </div>
+
+      <div id="sb-chatbot-body">
+        <div id="sb-chatbot-loading">Loading assistant...</div>
+        <iframe
+          id="sb-chatbot-iframe"
+          src="https://vercel-ai-gateway-demo-rhxnvso5l-cole-heiligs-projects.vercel.app/"
+          title="Suburbahn Solutions AI Assistant"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          onload="hideSuburbahnChatbotLoader()"
+        ></iframe>
+      </div>
+    </div>
+
+    <script>
+      const sbChatbotWindow = document.getElementById("sb-chatbot-window");
+      const sbChatbotBackdrop = document.getElementById("sb-chatbot-backdrop");
+      const sbChatbotLoading = document.getElementById("sb-chatbot-loading");
+
+      function openSuburbahnChatbot() {
+        sbChatbotWindow.style.display = "flex";
+        sbChatbotBackdrop.style.display = "block";
+        sbChatbotWindow.setAttribute("aria-hidden", "false");
+      }
+
+      function closeSuburbahnChatbot() {
+        sbChatbotWindow.style.display = "none";
+        sbChatbotBackdrop.style.display = "none";
+        sbChatbotWindow.setAttribute("aria-hidden", "true");
+      }
+
+      function toggleSuburbahnChatbot() {
+        const isOpen = sbChatbotWindow.style.display === "flex";
+        if (isOpen) {
+          closeSuburbahnChatbot();
+        } else {
+          openSuburbahnChatbot();
+        }
+      }
+
+      function hideSuburbahnChatbotLoader() {
+        if (sbChatbotLoading) {
+          sbChatbotLoading.style.display = "none";
+        }
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeSuburbahnChatbot();
+        }
+      });
+    </script>
 </body>
 </html>
