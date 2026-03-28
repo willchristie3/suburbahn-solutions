@@ -212,74 +212,6 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        #sb-chat-launch-text {
-            position: fixed;
-            right: 20px;
-            bottom: 78px;
-            z-index: 99997;
-            background: rgba(17, 24, 39, 0.95);
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            line-height: 1.35;
-            padding: 10px 12px;
-            border-radius: 12px;
-            max-width: 240px;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
-        }
-
-        #sb-chat-button {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            z-index: 99999;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 18px;
-            border: none;
-            border-radius: 999px;
-            background: linear-gradient(135deg, #111827, #1f2937);
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.22);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        #sb-chat-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.26);
-        }
-
-        #sb-chat-button-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #22c55e;
-            flex-shrink: 0;
-        }
-
-        @media (max-width: 640px) {
-            #sb-chat-launch-text {
-                right: 10px;
-                bottom: 74px;
-                max-width: calc(100vw - 90px);
-                font-size: 12px;
-                padding: 9px 11px;
-            }
-
-            #sb-chat-button {
-                right: 10px;
-                bottom: 10px;
-                font-size: 13px;
-                padding: 12px 16px;
-            }
-        }
-
         .section {
             max-width: 1280px;
             margin: 0 auto;
@@ -490,74 +422,6 @@
             text-decoration: none;
             font-weight: 600;
         }
-
-        #sb-chat-launch-text {
-            position: fixed;
-            right: 20px;
-            bottom: 78px;
-            z-index: 99997;
-            background: rgba(17, 24, 39, 0.95);
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            line-height: 1.35;
-            padding: 10px 12px;
-            border-radius: 12px;
-            max-width: 240px;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
-        }
-
-        #sb-chat-button {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            z-index: 99999;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 18px;
-            border: none;
-            border-radius: 999px;
-            background: linear-gradient(135deg, #111827, #1f2937);
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.22);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        #sb-chat-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.26);
-        }
-
-        #sb-chat-button-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #22c55e;
-            flex-shrink: 0;
-        }
-
-        @media (max-width: 640px) {
-            #sb-chat-launch-text {
-                right: 10px;
-                bottom: 74px;
-                max-width: calc(100vw - 90px);
-                font-size: 12px;
-                padding: 9px 11px;
-            }
-
-            #sb-chat-button {
-                right: 10px;
-                bottom: 10px;
-                font-size: 13px;
-                padding: 12px 16px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -584,7 +448,7 @@
                 <h1>Make faster lead follow-up and operations decisions with AI.</h1>
                 <p class="hero-description">Jonny is your Suburbahn AI assistant for contractors and local service teams. Use the chat widget to explore automation, lead response, and smarter workflows in minutes.</p>
                 <div class="button-group">
-                    <button class="btn-primary" type="button" onclick="openSBChatbot()">Open Jonny</button>
+                    <button class="btn-primary" type="button" onclick="openSuburbahnChatbot()">Open Jonny</button>
                     <a href="#how-it-works" class="btn-secondary">How it works</a>
                 </div>
             </div>
@@ -655,15 +519,6 @@
 
     <div id="sb-chatbot-backdrop" onclick="closeSuburbahnChatbot()"></div>
 
-    <div id="sb-chat-launch-text">
-        Get a custom AI plan in under 60 seconds.
-    </div>
-
-    <button id="sb-chat-button" type="button" onclick="openSBChatbot()" aria-label="Open AI chatbot">
-        <span id="sb-chat-button-dot"></span>
-        <span>Get My AI Plan</span>
-    </button>
-
     <button id="sb-chatbot-button" type="button" onclick="toggleSuburbahnChatbot()" aria-label="Open Jonny">
         <span id="sb-chatbot-button-dot"></span>
         <span>Ask Jonny</span>
@@ -688,7 +543,7 @@
             <div id="sb-chatbot-loading">Loading assistant...</div>
             <iframe
                 id="sb-chatbot-iframe"
-                src="https://chat.suburbahnsolutions.com"
+                src="https://vercel-ai-gateway-demo-rhxnvso5l-cole-heiligs-projects.vercel.app/"
                 title="Suburbahn Solutions Jonny Assistant"
                 loading="lazy"
                 referrerpolicy="strict-origin-when-cross-origin"
@@ -729,38 +584,11 @@
             }
         }
 
-        function openSBChatbot() {
-            window.open(
-                "https://chat.suburbahnsolutions.com",
-                "_blank",
-                "noopener,noreferrer"
-            );
-        }
-
         document.addEventListener("keydown", function (event) {
             if (event.key === "Escape") {
                 closeSuburbahnChatbot();
             }
         });
-    </script>
-
-    <div id="sb-chat-launch-text">
-        Get a custom AI plan in under 60 seconds.
-    </div>
-
-    <button id="sb-chat-button" type="button" onclick="openSBChatbot()" aria-label="Open AI chatbot">
-        <span id="sb-chat-button-dot"></span>
-        <span>Get My AI Plan</span>
-    </button>
-
-    <script>
-        function openSBChatbot() {
-            window.open(
-                "https://chat.suburbahnsolutions.com",
-                "_blank",
-                "noopener,noreferrer"
-            );
-        }
     </script>
 </body>
 </html>
