@@ -289,9 +289,103 @@
         .highlight-panel {
             border-radius: 2rem;
             padding: 2rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 30px 70px -24px rgba(7, 17, 31, 0.35);
+        }
+
+        .chat-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            border-radius: 2rem;
+            padding: 1.75rem;
             background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 25px 50px -12px rgba(7, 17, 31, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 30px 70px -24px rgba(7, 17, 31, 0.35);
+            min-height: 420px;
+        }
+
+        .chat-preview-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chat-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, #07c8f9, #22c55e);
+            color: #ffffff;
+            font-size: 1.25rem;
+            font-weight: 700;
+            box-shadow: 0 20px 40px rgba(7, 17, 31, 0.2);
+        }
+
+        .chat-preview-title {
+            font-size: 1rem;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.01em;
+        }
+
+        .chat-preview-subtitle {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .chat-messages {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .chat-message {
+            max-width: 78%;
+            padding: 1rem 1.1rem;
+            border-radius: 1.75rem;
+            line-height: 1.7;
+            box-shadow: 0 15px 30px rgba(7, 17, 31, 0.12);
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+        }
+
+        .chat-message.user {
+            margin-left: auto;
+            background: rgba(59, 130, 246, 0.18);
+        }
+
+        .chat-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .chat-note {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .chat-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 170px;
+            padding: 0.95rem 1.3rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.09);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
         }
 
         .highlight-panel h2,
@@ -358,9 +452,23 @@
                     <a href="#how-it-works" class="btn-secondary">How it works</a>
                 </div>
             </div>
-            <div class="highlight-panel">
-                <h2>Ready to test Jonny?</h2>
-                <p>Open the assistant and ask for real next steps on lead intake, booking, follow-up, or field team coordination. Jonny is tuned for service businesses, not generic AI copy.</p>
+            <div class="chat-preview">
+                <div class="chat-preview-header">
+                    <div class="chat-avatar">J</div>
+                    <div>
+                        <div class="chat-preview-title">Jonny is ready</div>
+                        <div class="chat-preview-subtitle">Live assistant for leads, booking, and automation advice.</div>
+                    </div>
+                </div>
+                <div class="chat-messages">
+                    <div class="chat-message">How can I automate my lead intake so I follow up faster and book more jobs?</div>
+                    <div class="chat-message user">What should I do first for my service business?</div>
+                    <div class="chat-message">Tell Jonny about your team and current process, and it will recommend the highest-value next step.</div>
+                </div>
+                <div class="chat-footer">
+                    <button class="btn-primary" type="button" onclick="openSuburbahnChatbot()">Open Jonny</button>
+                    <span class="chat-note">Jonny opens instantly in the corner.</span>
+                </div>
             </div>
         </section>
 
@@ -404,11 +512,8 @@
 
         <section class="section" id="contact">
             <h2 class="section-heading">Ready to talk about AI for your business?</h2>
-            <p class="section-description">Use Jonny to explore the best automation ideas, then contact Suburbahn Solutions to build the strategy and implementation plan.</p>
-            <div class="contact-panel">
-                <a href="tel:(405) 555-0100">Call (405) 555-0100</a>
-                <a href="mailto:hello@suburbahnsolutions.com">hello@suburbahnsolutions.com</a>
-            </div>
+            <p class="section-description">Use Jonny to uncover the best automation ideas, then reach out to Suburbahn Solutions with a stronger plan and clearer next step.</p>
+            <p class="section-description">This page is focused on Jonny first — the AI assistant that helps you identify practical improvements fast.</p>
         </section>
     </main>
 
